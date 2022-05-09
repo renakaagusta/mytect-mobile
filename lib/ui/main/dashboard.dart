@@ -1,26 +1,22 @@
-import 'dart:convert';
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mytect/ui/main/home/home.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:get_mac/get_mac.dart';
+import 'package:location/location.dart';
+import 'package:mytect/constants/colors.dart';
 import 'package:mytect/ui/main/history/history.dart';
+import 'package:mytect/ui/main/home/home.dart';
+import 'package:mytect/ui/main/poeple/poeple.dart';
 import 'package:mytect/ui/main/prediction/simulation.dart';
 import 'package:mytect/ui/main/profile/profile.dart';
-import 'package:mytect/constants/assets.dart';
-import 'package:mytect/constants/colors.dart';
-import 'package:mytect/constants/strings.dart';
-import 'package:geocoding/geocoding.dart' as geocoding;
-import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geocoder/geocoder.dart';
-import 'package:location/location.dart';
-import 'package:flutter/services.dart';
-import 'package:get_mac/get_mac.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wifi_hunter/wifi_hunter.dart';
 import 'package:wifi_hunter/wifi_hunter_result.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -31,7 +27,7 @@ class _MainPageState extends State<MainPage> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   int _currentIndex = 0;
   final List<Widget> _children = [];
-  final List<Widget> pages = [HomeScreen(), SimulationScreen(), HistoryScreen(), ProfileScreen()];
+  final List<Widget> pages = [HomeScreen(), SimulationScreen(), PoepleScreen(), HistoryScreen(), ProfileScreen()];
   WiFiHunterResult wiFiHunterResult = WiFiHunterResult();
 
   void getData() async {
@@ -84,14 +80,6 @@ class _MainPageState extends State<MainPage> {
       'wifiList': wifiList,
       'time': FieldValue.serverTimestamp(),
       'updatedAt': DateTime.now()
-    }).then((result) {
-      /*print("..latitude");
-      print(locationData.latitude);
-      print("..longitude");
-      print(locationData.longitude);
-      print("..altitude");
-      print(locationData.altitude);
-      print(macAddress);*/
     });
   }
 
@@ -170,11 +158,11 @@ class _MainPageState extends State<MainPage> {
                         padding: EdgeInsets.only(top: 5.0),
                         height: 50.0,
                         child: Column(children: [
-                          Icon(CupertinoIcons.list_bullet,
+                          Icon(CupertinoIcons.person_2,
                               color: (_currentIndex == 2)
                                   ? AppColors.PrimaryColor
                                   : Colors.black54),
-                          Text('History',
+                          Text('Poeple',
                               style: TextStyle(
                                   fontSize: 12.0,
                                   color: (_currentIndex == 2)
@@ -192,14 +180,36 @@ class _MainPageState extends State<MainPage> {
                         padding: EdgeInsets.only(top: 5.0),
                         height: 50.0,
                         child: Column(children: [
+                          Icon(CupertinoIcons.list_bullet,
+                              color: (_currentIndex ==3)
+                                  ? AppColors.PrimaryColor
+                                  : Colors.black54),
+                          Text('History',
+                              style: TextStyle(
+                                  fontSize: 12.0,
+                                  color: (_currentIndex == 3)
+                                      ? AppColors.PrimaryColor
+                                      : Colors.black54))
+                        ])))),
+            Expanded(
+                child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _currentIndex = 4;
+                      });
+                    },
+                    child: Container(
+                        padding: EdgeInsets.only(top: 5.0),
+                        height: 50.0,
+                        child: Column(children: [
                           Icon(CupertinoIcons.person,
-                              color: (_currentIndex == 3)
+                              color: (_currentIndex == 4)
                                   ? AppColors.PrimaryColor
                                   : Colors.black54),
                           Text('Profile',
                               style: TextStyle(
                                   fontSize: 12.0,
-                                  color: (_currentIndex == 3)
+                                  color: (_currentIndex == 4)
                                       ? AppColors.PrimaryColor
                                       : Colors.black54))
                         ])))),

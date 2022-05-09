@@ -1,4 +1,5 @@
 import 'package:mytect/ui/main/dashboard.dart';
+import 'package:mytect/ui/main/poeple/poeple_location.dart';
 import 'package:mytect/ui/signin/signin.dart';
 import 'package:mytect/ui/splash/splash.dart';
 import 'package:mytect/ui/signup/signup.dart';
@@ -15,6 +16,7 @@ class Routes {
   static const String main = '/dashboard';
   static const String welcome = '/welcome';
   static const String signup = '/signup';
+  static const String poepleLocation = '/poeple/location';
   static const String user = '/user';
   static const String data = '/data';
   static const String settingProfile = '/profile/setting';
@@ -29,6 +31,7 @@ class Routes {
     signin: (BuildContext context) => SignInScreen(),
     signup: (BuildContext context) => SignUpScreen(),
     main: (BuildContext context) => MainPage(),
+    poepleLocation: (BuildContext context) => PoepleLocationScreen(),
     data: (BuildContext context) => DataScreen(),
     privacyProfile: (BuildContext context) => PrivacyScreen(),
     versionProfile: (BuildContext context) => VersionScreen(),

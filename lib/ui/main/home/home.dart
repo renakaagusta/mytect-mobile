@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:mytect/constants/assets.dart';
 import 'package:mytect/constants/colors.dart';
@@ -112,8 +111,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   String floorValue;
   String placeValue;
-
-  int inputPlaceType = 0;
 
   Future<void> getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -374,108 +371,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                       CrossAxisAlignment
                                                           .stretch,
                                                   children: [
-                                                    Text('Lantai',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                                    DropdownButton(
-                                                      value: floorValue,
-                                                      isExpanded: true,
-                                                      icon: Icon(Icons
-                                                          .keyboard_arrow_down),
-                                                      items: floor
-                                                          .map((String items) {
-                                                        return DropdownMenuItem(
-                                                            value: items,
-                                                            child: Text(items));
-                                                      }).toList(),
-                                                      onChanged:
-                                                          (String newValue) {
-                                                        setState(() {
-                                                          floorValue = newValue;
-                                                        });
-                                                      },
-                                                    ),
-                                                    Text('Lokasi',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                                    new Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: <Widget>[
-                                                          new Radio(
-                                                            value: 0,
-                                                            groupValue:
-                                                                inputPlaceType,
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                inputPlaceType =
-                                                                    value;
-                                                              });
-                                                            },
-                                                          ),
-                                                          new Text(
-                                                            'Pilihan',
-                                                            style:
-                                                                new TextStyle(
-                                                                    fontSize:
-                                                                        16.0),
-                                                          ),
-                                                          new Radio(
-                                                            value: 1,
-                                                            groupValue:
-                                                                inputPlaceType,
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                inputPlaceType =
-                                                                    value;
-                                                              });
-                                                            },
-                                                          ),
-                                                          new Text(
-                                                            'Isian',
-                                                            style:
-                                                                new TextStyle(
-                                                              fontSize: 16.0,
-                                                            ),
-                                                          ),
-                                                        ]),
-                                                    if (inputPlaceType == 0)
-                                                      DropdownButton(
-                                                        value: placeValue,
-                                                        isExpanded: true,
-                                                        icon: Icon(Icons
-                                                            .keyboard_arrow_down),
-                                                        items: (floorValue ==
-                                                                    '1'
-                                                                ? floor1
-                                                                : (floorValue ==
-                                                                        '2'
-                                                                    ? floor2
-                                                                    : floorValue ==
-                                                                            '3'
-                                                                        ? floor3
-                                                                        : floor4))
-                                                            .map(
-                                                                (String items) {
-                                                          return DropdownMenuItem(
-                                                              value: items,
-                                                              child:
-                                                                  Text(items));
-                                                        }).toList(),
-                                                        onChanged:
-                                                            (String newValue) {
-                                                          setState(() {
-                                                            placeValue =
-                                                                newValue;
-                                                          });
-                                                        },
-                                                      ),
-                                                    if (inputPlaceType == 1)
                                                       Row(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
@@ -549,9 +444,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                     GestureDetector(
                                                       onTap: () async {
                                                         EasyLoading.show();
-
                                                         if (placeController
-                                                            .text.isEmpty && inputPlaceType == 1) {
+                                                            .text.isEmpty) {
                                                           EasyLoading.dismiss();
                                                           Alert(
                                                               context: context,
@@ -606,13 +500,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                             .collection(
                                                                 'dataByLocation')
                                                             .add({
-                                                          'floor': floorValue,
                                                           'place':
-                                                              inputPlaceType ==
-                                                                      1
-                                                                  ? placeController
-                                                                      .text
-                                                                  : placeValue,
+                                                             placeController
+                                                                      .text,
                                                           'data': data.id,
                                                           'user': user['id'],
                                                           'created': FieldValue
@@ -719,7 +609,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                       right: 20),
                                                   child: Row(
                                                     children: [
-                                                      Icon(
+                                                      /*Icon(
                                                           CupertinoIcons
                                                               .location_solid,
                                                           size: 30,
@@ -754,7 +644,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                                   color: Colors
                                                                       .black87))
                                                         ],
-                                                      )
+                                                      )*/
                                                     ],
                                                   )),]),
                                                   
