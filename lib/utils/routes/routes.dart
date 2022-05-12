@@ -31,7 +31,7 @@ class Routes {
     signin: (BuildContext context) => SignInScreen(),
     signup: (BuildContext context) => SignUpScreen(),
     main: (BuildContext context) => MainPage(),
-    poepleLocation: (BuildContext context) => PoepleLocationScreen(),
+    poepleLocation: (BuildContext context) => PeopleLocationScreen(),
     data: (BuildContext context) => DataScreen(),
     privacyProfile: (BuildContext context) => PrivacyScreen(),
     versionProfile: (BuildContext context) => VersionScreen(),

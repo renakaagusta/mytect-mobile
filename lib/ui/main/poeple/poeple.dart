@@ -15,12 +15,12 @@ import 'package:mytect/ui/main/poeple/poeple_location.dart';
 import 'package:mytect/utils/timeago/timeago.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PoepleScreen extends StatefulWidget {
+class PeopleScreen extends StatefulWidget {
   @override
-  _PoepleScreenState createState() => _PoepleScreenState();
+  _PeopleScreenState createState() => _PeopleScreenState();
 }
 
-class _PoepleScreenState extends State<PoepleScreen>
+class _PeopleScreenState extends State<PeopleScreen>
     with TickerProviderStateMixin {
   List<dynamic> users = [];
   int wifiIndex = 0;
@@ -147,7 +147,7 @@ class _PoepleScreenState extends State<PoepleScreen>
                                       if(user.id.toString() == docs[index].data()['user']) foundUser = user;
                                     });
                                     return GestureDetector(
-                                      onTap:()=>Navigator.of(context).pushNamed('/poeple/location', arguments: PoepleLocationArguments(foundUser, docs[index].data()),),
+                                      onTap:()=>Navigator.of(context).pushNamed('/poeple/location', arguments: PeopleLocationArguments(foundUser, docs[index].data()),),
                                         child: Container(
                                             decoration: BoxDecoration(
                                                 color: Colors.white,
@@ -207,7 +207,7 @@ class _PoepleScreenState extends State<PoepleScreen>
                                   children: [
                                     Icon(CupertinoIcons.info_circle, size: 40),
                                     SizedBox(height: 30),
-                                    Text('Poeple history not found')
+                                    Text('People history not found')
                                   ],
                                 ),
                               );

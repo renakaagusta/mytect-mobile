@@ -8,19 +8,19 @@ import 'package:mytect/constants/assets.dart';
 import 'package:mytect/constants/ssid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PoepleLocationArguments {
+class PeopleLocationArguments {
   final dynamic user;
   final dynamic predictionResult;
 
-  PoepleLocationArguments(this.user, this.predictionResult);
+  PeopleLocationArguments(this.user, this.predictionResult);
 }
 
-class PoepleLocationScreen extends StatefulWidget {
+class PeopleLocationScreen extends StatefulWidget {
   @override
-  _PoepleLocationScreenState createState() => _PoepleLocationScreenState();
+  _PeopleLocationScreenState createState() => _PeopleLocationScreenState();
 }
 
-class _PoepleLocationScreenState extends State<PoepleLocationScreen>
+class _PeopleLocationScreenState extends State<PeopleLocationScreen>
     with TickerProviderStateMixin {
   List<dynamic> users = [];
   int wifiIndex = 0;
@@ -58,7 +58,7 @@ class _PoepleLocationScreenState extends State<PoepleLocationScreen>
   @override
   Widget build(BuildContext context) {
     final arguments =
-        ModalRoute.of(context)?.settings.arguments as PoepleLocationArguments;
+        ModalRoute.of(context)?.settings.arguments as PeopleLocationArguments;
     final predictionResult = arguments.predictionResult;
     final user = arguments.user;
     return Scaffold(

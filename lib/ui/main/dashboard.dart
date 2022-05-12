@@ -27,7 +27,7 @@ class _MainPageState extends State<MainPage> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   int _currentIndex = 0;
   final List<Widget> _children = [];
-  final List<Widget> pages = [HomeScreen(), SimulationScreen(), PoepleScreen(), HistoryScreen(), ProfileScreen()];
+  final List<Widget> pages = [HomeScreen(), SimulationScreen(), PeopleScreen(), HistoryScreen(), ProfileScreen()];
   WiFiHunterResult wiFiHunterResult = WiFiHunterResult();
 
   void getData() async {
@@ -162,7 +162,7 @@ class _MainPageState extends State<MainPage> {
                               color: (_currentIndex == 2)
                                   ? AppColors.PrimaryColor
                                   : Colors.black54),
-                          Text('Poeple',
+                          Text('People',
                               style: TextStyle(
                                   fontSize: 12.0,
                                   color: (_currentIndex == 2)
