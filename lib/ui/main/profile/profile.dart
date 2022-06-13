@@ -1,23 +1,12 @@
+import 'dart:convert';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:convert';
-import 'dart:io';
-import 'package:firebase_core/firebase_core.dart' as firebase_core;
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:path/path.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:geocoding/geocoding.dart' as geocoding;
-import 'package:geolocator/geolocator.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geocoder/geocoder.dart';
-import 'package:location/location.dart';
 import 'package:mytect/constants/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -126,7 +115,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ],
                       ),
-                      Icon(CupertinoIcons.pencil, color: Colors.white, size: 30)
+                      GestureDetector(
+                        child: 
+                      Icon(CupertinoIcons.pencil, color: Colors.white, size: 30),
+                      onTap: () async {
+                        await Navigator.of(context).pushNamed('/profile/setting/edit');
+                        getData();
+                      },
+                      )
                     ],
                   ),
                 ),

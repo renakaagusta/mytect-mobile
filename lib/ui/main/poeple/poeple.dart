@@ -1,16 +1,10 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:mytect/constants/assets.dart';
 import 'package:mytect/constants/colors.dart';
-import 'package:mytect/constants/ssid.dart';
-import 'package:mytect/helpers/dio.dart';
-import 'package:mytect/services/ssid_services.dart';
 import 'package:mytect/ui/main/poeple/poeple_location.dart';
 import 'package:mytect/utils/timeago/timeago.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -121,7 +115,7 @@ class _PeopleScreenState extends State<PeopleScreen>
 
                   return StreamBuilder<QuerySnapshot>(
                       stream:
-                          firestore.collection('predictionResult').snapshots(),
+                          firestore.collection('predictionResult').orderBy('created', descending: true).snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (!snapshot.hasData) {

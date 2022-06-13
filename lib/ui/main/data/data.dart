@@ -1,21 +1,11 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:math';
-import 'package:firebase_core/firebase_core.dart' as firebase_core;
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/services.dart';
-import 'package:mytect/utils/map/icon_map.dart';
-import 'package:intl/intl.dart';
-import 'package:mytect/utils/date.dart';
-import 'package:sweetalert/sweetalert.dart';
-import 'package:mytect/constants/assets.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:mytect/constants/colors.dart';
-import 'package:mytect/constants/strings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DataScreen extends StatefulWidget {
   @override

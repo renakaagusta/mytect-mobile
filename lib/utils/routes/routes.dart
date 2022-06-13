@@ -1,13 +1,14 @@
-import 'package:mytect/ui/main/dashboard.dart';
-import 'package:mytect/ui/main/poeple/poeple_location.dart';
-import 'package:mytect/ui/signin/signin.dart';
-import 'package:mytect/ui/splash/splash.dart';
-import 'package:mytect/ui/signup/signup.dart';
-import 'package:mytect/ui/welcome/welcome.dart';
-import 'package:mytect/ui/main/data/data.dart';
-import 'package:mytect/ui/main/profile/privacy/privacy.dart';
-import 'package:mytect/ui/main/profile/version/version.dart';
 import 'package:flutter/material.dart';
+import 'package:mytect/ui/main/dashboard.dart';
+import 'package:mytect/ui/main/data/data.dart';
+import 'package:mytect/ui/main/poeple/poeple_location.dart';
+import 'package:mytect/ui/main/profile/privacy/privacy.dart';
+import 'package:mytect/ui/main/profile/profile_edit.dart';
+import 'package:mytect/ui/main/profile/version/version.dart';
+import 'package:mytect/ui/signin/signin.dart';
+import 'package:mytect/ui/signup/signup.dart';
+import 'package:mytect/ui/splash/splash.dart';
+import 'package:mytect/ui/welcome/welcome.dart';
 
 class Routes {
   Routes._();
@@ -33,6 +34,7 @@ class Routes {
     main: (BuildContext context) => MainPage(),
     poepleLocation: (BuildContext context) => PeopleLocationScreen(),
     data: (BuildContext context) => DataScreen(),
+    editSettingProfile: (BuildContext context) => ProfileEditScreen(),
     privacyProfile: (BuildContext context) => PrivacyScreen(),
     versionProfile: (BuildContext context) => VersionScreen(),
   };

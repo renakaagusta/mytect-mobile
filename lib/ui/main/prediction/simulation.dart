@@ -117,7 +117,7 @@ class _SimulationScreenState extends State<SimulationScreen>
                         SizedBox(
                           height: 10,
                         ),
-                        Text('Tekan tombol mulai untuk melakukan simulasi',
+                        Text('Tekan tombol start untuk mulai melakukan simulasi',
                             style: TextStyle(fontSize: 16)),
                         SizedBox(
                           height: 40,
@@ -141,7 +141,7 @@ class _SimulationScreenState extends State<SimulationScreen>
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5))),
                             child: Text(
-                              'Input',
+                              'Start',
                               style: TextStyle(
                                   color: Colors.white, fontSize: 16.0),
                             ),
@@ -234,7 +234,7 @@ class _SimulationScreenState extends State<SimulationScreen>
                                 SizedBox(
                                   height: 40,
                                 ),
-                                Text('SSID 1',
+                                Text('SSID 0',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18)),
@@ -244,6 +244,29 @@ class _SimulationScreenState extends State<SimulationScreen>
                                 TextField(
                                   cursorColor: AppColors.PrimaryColor,
                                   controller: ssid1Conttroller,
+                                  decoration: InputDecoration(
+                                    hintText: 'SSID 0',
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: AppColors.PrimaryColor),
+                                    ),
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Text('SSID 1',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18)),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                TextField(
+                                  autofocus: true,
+                                  cursorColor: AppColors.PrimaryColor,
+                                  controller: ssid2Conttroller,
                                   decoration: InputDecoration(
                                     hintText: 'SSID 1',
                                     focusedBorder: UnderlineInputBorder(
@@ -266,7 +289,7 @@ class _SimulationScreenState extends State<SimulationScreen>
                                 TextField(
                                   autofocus: true,
                                   cursorColor: AppColors.PrimaryColor,
-                                  controller: ssid2Conttroller,
+                                  controller: ssid3Conttroller,
                                   decoration: InputDecoration(
                                     hintText: 'SSID 2',
                                     focusedBorder: UnderlineInputBorder(
@@ -289,7 +312,7 @@ class _SimulationScreenState extends State<SimulationScreen>
                                 TextField(
                                   autofocus: true,
                                   cursorColor: AppColors.PrimaryColor,
-                                  controller: ssid3Conttroller,
+                                  controller: ssid4Conttroller,
                                   decoration: InputDecoration(
                                     hintText: 'SSID 3',
                                     focusedBorder: UnderlineInputBorder(
@@ -312,7 +335,7 @@ class _SimulationScreenState extends State<SimulationScreen>
                                 TextField(
                                   autofocus: true,
                                   cursorColor: AppColors.PrimaryColor,
-                                  controller: ssid4Conttroller,
+                                  controller: ssid5Conttroller,
                                   decoration: InputDecoration(
                                     hintText: 'SSID 4',
                                     focusedBorder: UnderlineInputBorder(
@@ -335,32 +358,9 @@ class _SimulationScreenState extends State<SimulationScreen>
                                 TextField(
                                   autofocus: true,
                                   cursorColor: AppColors.PrimaryColor,
-                                  controller: ssid5Conttroller,
-                                  decoration: InputDecoration(
-                                    hintText: 'SSID 5',
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: AppColors.PrimaryColor),
-                                    ),
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                Text('SSID 6',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18)),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                TextField(
-                                  autofocus: true,
-                                  cursorColor: AppColors.PrimaryColor,
                                   controller: ssid6Conttroller,
                                   decoration: InputDecoration(
-                                    hintText: 'SSID 6',
+                                    hintText: 'SSID 5',
                                     focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                           color: AppColors.PrimaryColor),

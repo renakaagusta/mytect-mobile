@@ -27,7 +27,13 @@ class _MainPageState extends State<MainPage> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   int _currentIndex = 0;
   final List<Widget> _children = [];
-  final List<Widget> pages = [HomeScreen(), SimulationScreen(), PeopleScreen(), HistoryScreen(), ProfileScreen()];
+  final List<Widget> pages = [
+    HomeScreen(),
+    SimulationScreen(),
+    PeopleScreen(),
+    HistoryScreen(),
+    ProfileScreen()
+  ];
   WiFiHunterResult wiFiHunterResult = WiFiHunterResult();
 
   void getData() async {
@@ -63,19 +69,20 @@ class _MainPageState extends State<MainPage> {
       });
     });
 
-    final coordinates = new Coordinates(locationData.latitude, locationData.longitude);
-     List<Address> addressFromGeocoder =
+    final coordinates =
+        new Coordinates(locationData.latitude, locationData.longitude);
+    List<Address> addressFromGeocoder =
         await Geocoder.local.findAddressesFromCoordinates(coordinates);
-        
+
     await firestore.collection('data').add({
       'user': user['id'],
       'latitude': locationData.latitude,
       'longitude': locationData.longitude,
       'altitude': locationData.altitude,
-        'adminArea': addressFromGeocoder.first.adminArea,
-        'subLocality': addressFromGeocoder.first.subLocality,
-        'locality': addressFromGeocoder.first.locality,
-        'subAdminArea': addressFromGeocoder.first.subAdminArea,
+      'adminArea': addressFromGeocoder.first.adminArea,
+      'subLocality': addressFromGeocoder.first.subLocality,
+      'locality': addressFromGeocoder.first.locality,
+      'subAdminArea': addressFromGeocoder.first.subAdminArea,
       'macAddress': macAddress,
       'wifiList': wifiList,
       'time': FieldValue.serverTimestamp(),
@@ -86,7 +93,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    
+
     Timer.periodic(Duration(seconds: 40), (timer) {
       getData();
     });
@@ -94,7 +101,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
           child: Padding(
@@ -181,7 +187,7 @@ class _MainPageState extends State<MainPage> {
                         height: 50.0,
                         child: Column(children: [
                           Icon(CupertinoIcons.list_bullet,
-                              color: (_currentIndex ==3)
+                              color: (_currentIndex == 3)
                                   ? AppColors.PrimaryColor
                                   : Colors.black54),
                           Text('History',

@@ -151,6 +151,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             'username': snapshot.docs[0].data()['username'],
                             'email': snapshot.docs[0].data()['email'],
                             'password': snapshot.docs[0].data()['password'],
+                            'picture': snapshot.docs[0].data()['picture'] ?? '',
                           }));
 
                       Navigator.of(context).pushNamed('/dashboard');
@@ -169,6 +170,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 'username': snapshot.docs[0].data()['username'],
                                 'email': snapshot.docs[0].data()['email'],
                                 'password': snapshot.docs[0].data()['password'],
+                                'picture': snapshot.docs[0].data()['picture'] ?? '',
                               }));
 
                           Navigator.of(context).pushNamed('/dashboard');

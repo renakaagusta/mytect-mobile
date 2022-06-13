@@ -8,6 +8,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:mytect/constants/assets.dart';
 import 'package:mytect/constants/colors.dart';
 import 'package:mytect/constants/strings.dart';
+import 'package:mytect/utils/timeago/timeago.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sweetalert/sweetalert.dart';
@@ -173,204 +174,222 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
                                     dynamic data = snapshot.data.docs[0];
 
-                                    return SingleChildScrollView(child: Container(
-                                        child: Column(
-                                      children: [
-                                        Container(
-                                            height: size.height * 0.45,
-                                            width: size.width,
-                                            padding: EdgeInsets.only(
-                                                top: 40,
-                                                bottom: 20,
-                                                left: 20,
-                                                right: 20),
-                                            decoration: BoxDecoration(
-                                                gradient: LinearGradient(
-                                                    colors: [
-                                                  AppColors.PrimaryColor,
-                                                  AppColors.SecondaryColor
-                                                ])),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Image.asset(
-                                                            Assets.appLogoWhite,
-                                                            height: 40.0,
-                                                            width: 25.0),
-                                                        SizedBox(width: 15),
-                                                        Text(Strings.appName,
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 24,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold))
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    wifiIndex != 0
-                                                        ? GestureDetector(
-                                                            child: Container(
-                                                                height: 50,
-                                                                width: 50,
-                                                                child: Icon(
-                                                                    CupertinoIcons
-                                                                        .chevron_back,
-                                                                    color: Colors
-                                                                        .white)),
-                                                            onTap: () {
-                                                              setState(() {
-                                                                wifiIndex =
-                                                                    wifiIndex -
-                                                                        1;
-                                                              });
-                                                            })
-                                                        : Container(
-                                                            height: 50,
-                                                            width: 50,
-                                                          ),
-                                                    Column(
-                                                      children: [
-                                                        Text(
-                                                            data.data()['wifiList']
-                                                                        [wifiIndex]
-                                                                    ['level'] +
-                                                                " Dbm",
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 28)),
-                                                      ],
-                                                    ),
-                                                    wifiIndex <
-                                                            data
-                                                                    .data()[
-                                                                        'wifiList']
-                                                                    .length -
-                                                                1
-                                                        ? GestureDetector(
-                                                            child: Container(
-                                                                height: 50,
-                                                                width: 50,
-                                                                child: Icon(
-                                                                    CupertinoIcons
-                                                                        .chevron_forward,
-                                                                    color: Colors
-                                                                        .white)),
-                                                            onTap: () {
-                                                              setState(() {
-                                                                wifiIndex =
-                                                                    wifiIndex +
-                                                                        1;
-                                                              });
-                                                            })
-                                                        : Container(
-                                                            height: 50,
-                                                            width: 50,
-                                                          ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Icon(
-                                                            CupertinoIcons.wifi,
-                                                            color: Colors.white,
-                                                            size: 30),
-                                                        SizedBox(width: 15),
+                                    return SingleChildScrollView(
+                                      child: Container(
+                                          child: Column(
+                                        children: [
+                                          Container(
+                                              height: size.height * 0.45,
+                                              width: size.width,
+                                              padding: EdgeInsets.only(
+                                                  top: 40,
+                                                  bottom: 20,
+                                                  left: 20,
+                                                  right: 20),
+                                              decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                      colors: [
+                                                    AppColors.PrimaryColor,
+                                                    AppColors.SecondaryColor
+                                                  ])),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Image.asset(
+                                                              Assets
+                                                                  .appLogoWhite,
+                                                              height: 40.0,
+                                                              width: 25.0),
+                                                          SizedBox(width: 15),
+                                                          Text(Strings.appName,
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 24,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold))
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      wifiIndex != 0
+                                                          ? GestureDetector(
+                                                              child: Container(
+                                                                  height: 50,
+                                                                  width: 50,
+                                                                  child: Icon(
+                                                                      CupertinoIcons
+                                                                          .chevron_back,
+                                                                      color: Colors
+                                                                          .white)),
+                                                              onTap: () {
+                                                                setState(() {
+                                                                  wifiIndex =
+                                                                      wifiIndex -
+                                                                          1;
+                                                                });
+                                                              })
+                                                          : Container(
+                                                              height: 50,
+                                                              width: 50,
+                                                            ),
+                                                      if (data
+                                                          .data()['wifiList']
+                                                          .isNotEmpty)
                                                         Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
                                                           children: [
                                                             Text(
                                                                 data.data()['wifiList']
+                                                                            [
+                                                                            wifiIndex]
                                                                         [
-                                                                        wifiIndex]
-                                                                    ['SDDI'],
+                                                                        'level'] +
+                                                                    " Dbm",
                                                                 style: TextStyle(
-                                                                    color: Colors
-                                                                        .white,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .bold)),
-                                                            SizedBox(height: 5),
-                                                            Text(
-                                                                data.data()['wifiList']
-                                                                        [
-                                                                        wifiIndex]
-                                                                    ['BSSID'],
-                                                                style: TextStyle(
+                                                                            .bold,
                                                                     color: Colors
-                                                                        .white))
+                                                                        .white,
+                                                                    fontSize:
+                                                                        28)),
                                                           ],
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Text(
-                                                            data.data()[
-                                                                'subLocality']??'-',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                        SizedBox(height: 5),
-                                                        Text(
-                                                            data.data()[
-                                                                'locality']??'-',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white))
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            )),
-                                        Container(
-                                          
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.only(
-                                                    top: 30,
-                                                    left: 20,
-                                                    right: 20),
-                                                width: size.width - 20,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .stretch,
-                                                  children: [
+                                                        ),
+                                                      wifiIndex <
+                                                              data
+                                                                      .data()[
+                                                                          'wifiList']
+                                                                      .length -
+                                                                  1
+                                                          ? GestureDetector(
+                                                              child: Container(
+                                                                  height: 50,
+                                                                  width: 50,
+                                                                  child: Icon(
+                                                                      CupertinoIcons
+                                                                          .chevron_forward,
+                                                                      color: Colors
+                                                                          .white)),
+                                                              onTap: () {
+                                                                setState(() {
+                                                                  wifiIndex =
+                                                                      wifiIndex +
+                                                                          1;
+                                                                });
+                                                              })
+                                                          : Container(
+                                                              height: 50,
+                                                              width: 50,
+                                                            ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Icon(
+                                                              CupertinoIcons
+                                                                  .wifi,
+                                                              color:
+                                                                  Colors.white,
+                                                              size: 30),
+                                                          SizedBox(width: 15),
+                                                          if (data
+                                                              .data()[
+                                                                  'wifiList']
+                                                              .isNotEmpty)
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                    data.data()['wifiList']
+                                                                            [
+                                                                            wifiIndex]
+                                                                        [
+                                                                        'SDDI'],
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontWeight:
+                                                                            FontWeight.bold)),
+                                                                SizedBox(
+                                                                    height: 5),
+                                                                Text(
+                                                                    data.data()['wifiList']
+                                                                            [
+                                                                            wifiIndex]
+                                                                        [
+                                                                        'BSSID'],
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white))
+                                                              ],
+                                                            )
+                                                        ],
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Text(
+                                                              data.data()[
+                                                                      'subLocality'] ??
+                                                                  '-',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                          SizedBox(height: 5),
+                                                          Text(
+                                                              data.data()[
+                                                                      'locality'] ??
+                                                                  '-',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white))
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              )),
+                                          Container(
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.only(
+                                                      top: 30,
+                                                      left: 20,
+                                                      right: 20),
+                                                  width: size.width - 20,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .stretch,
+                                                    children: [
                                                       Row(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
@@ -441,219 +460,255 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                               ),
                                                             ),
                                                           ]),
-                                                    GestureDetector(
-                                                      onTap: () async {
-                                                        EasyLoading.show();
-                                                        if (placeController
-                                                            .text.isEmpty) {
-                                                          EasyLoading.dismiss();
-                                                          Alert(
-                                                              context: context,
-                                                              title: '',
-                                                              closeIcon: null,
-                                                              content: Column(
-                                                                children: <
-                                                                    Widget>[
-                                                                  Icon(
-                                                                      CupertinoIcons
-                                                                          .exclamationmark_triangle,
-                                                                      color: AppColors
-                                                                          .PrimaryColor,
-                                                                      size:
-                                                                          100.0),
-                                                                  SizedBox(
-                                                                      height:
-                                                                          20.0),
-                                                                  Text(
-                                                                      "Please input location",
+                                                      GestureDetector(
+                                                        onTap: () async {
+                                                          EasyLoading.show();
+                                                          if (placeController
+                                                              .text.isEmpty) {
+                                                            EasyLoading
+                                                                .dismiss();
+                                                            Alert(
+                                                                context:
+                                                                    context,
+                                                                title: '',
+                                                                closeIcon: null,
+                                                                content: Column(
+                                                                  children: <
+                                                                      Widget>[
+                                                                    Icon(
+                                                                        CupertinoIcons
+                                                                            .exclamationmark_triangle,
+                                                                        color: AppColors
+                                                                            .PrimaryColor,
+                                                                        size:
+                                                                            100.0),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            20.0),
+                                                                    Text(
+                                                                        "Please input location",
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                20.0))
+                                                                  ],
+                                                                ),
+                                                                buttons: [
+                                                                  DialogButton(
+                                                                    color: AppColors
+                                                                        .PrimaryColor,
+                                                                    onPressed:
+                                                                        () {
+                                                                      Navigator.of(
+                                                                              context,
+                                                                              rootNavigator: true)
+                                                                          .pop();
+                                                                    },
+                                                                    child: Text(
+                                                                      "OK",
                                                                       style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
                                                                           fontSize:
-                                                                              20.0))
-                                                                ],
-                                                              ),
-                                                              buttons: [
-                                                                DialogButton(
-                                                                  color: AppColors
-                                                                      .PrimaryColor,
-                                                                  onPressed:
-                                                                      () {
-                                                                    Navigator.of(
-                                                                            context,
-                                                                            rootNavigator:
-                                                                                true)
-                                                                        .pop();
-                                                                  },
-                                                                  child: Text(
-                                                                    "OK",
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontSize:
-                                                                            20),
-                                                                  ),
-                                                                )
-                                                              ]).show();
-                                                          return;
-                                                        }
+                                                                              20),
+                                                                    ),
+                                                                  )
+                                                                ]).show();
+                                                            return;
+                                                          }
 
-                                                        await firestore
-                                                            .collection(
-                                                                'dataByLocation')
-                                                            .add({
-                                                          'place':
-                                                             placeController
-                                                                      .text,
-                                                          'data': data.id,
-                                                          'user': user['id'],
-                                                          'created': FieldValue
-                                                              .serverTimestamp()
-                                                        }).then((result) {
-                                                          EasyLoading.dismiss();
-                                                          SweetAlert.show(
-                                                              context,
-                                                              subtitle:
-                                                                  "Data sent successfully",
-                                                              style:
-                                                                  SweetAlertStyle
-                                                                      .success);
-                                                        });
-                                                      },
-                                                      child: Container(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal:
-                                                                    10.0,
-                                                                vertical: 15),
-                                                        width:
-                                                            size.width * 0.22,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                gradient:
-                                                                    LinearGradient(
-                                                                        colors: [
-                                                                      AppColors
-                                                                          .PrimaryColor,
-                                                                      AppColors
-                                                                          .PrimaryColor,
-                                                                    ]),
-                                                                borderRadius: BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            5))),
-                                                        child: Text(
-                                                          'Input',
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 16.0),
+                                                          await firestore
+                                                              .collection(
+                                                                  'dataByLocation')
+                                                              .add({
+                                                            'place':
+                                                                placeController
+                                                                    .text,
+                                                            'data': data.id,
+                                                            'user': user['id'],
+                                                            'created': FieldValue
+                                                                .serverTimestamp()
+                                                          }).then((result) {
+                                                            EasyLoading
+                                                                .dismiss();
+                                                            SweetAlert.show(
+                                                                context,
+                                                                subtitle:
+                                                                    "Data sent successfully",
+                                                                style:
+                                                                    SweetAlertStyle
+                                                                        .success);
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10.0,
+                                                                  vertical: 15),
+                                                          width:
+                                                              size.width * 0.22,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                                  gradient:
+                                                                      LinearGradient(
+                                                                          colors: [
+                                                                        AppColors
+                                                                            .PrimaryColor,
+                                                                        AppColors
+                                                                            .PrimaryColor,
+                                                                      ]),
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              5))),
+                                                          child: Text(
+                                                            'Input',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 16.0),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                              Row(children: [Container(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 18,
-                                                      left: 20,
-                                                      right: 20,
-                                                      top: 20),
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(
-                                                          CupertinoIcons
-                                                              .waveform,
-                                                          size: 30,
-                                                          color: Colors.grey),
-                                                      SizedBox(width: 20),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                Column(children: [
+                                                  Container(
+                                                      padding: EdgeInsets.only(
+                                                          bottom: 18,
+                                                          left: 20,
+                                                          right: 20,
+                                                          top: 20),
+                                                      child: Row(
                                                         children: [
-                                                          Text("Frequency",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold)),
-                                                          SizedBox(height: 5),
-                                                          Text(
-                                                              data.data()['wifiList']
-                                                                              [
-                                                                              wifiIndex]
-                                                                          [
-                                                                          'Frequency'] !=
-                                                                      null
-                                                                  ? data.data()['wifiList']
-                                                                              [
-                                                                              wifiIndex]
-                                                                          [
-                                                                          'Frequency'] +
-                                                                      ' MHZ'
-                                                                  : '-',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black87)),
+                                                          Icon(
+                                                              CupertinoIcons
+                                                                  .waveform,
+                                                              size: 30,
+                                                              color:
+                                                                  Colors.grey),
+                                                          SizedBox(width: 20),
+                                                          if (data
+                                                              .data()[
+                                                                  'wifiList']
+                                                              .isNotEmpty)
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                    "Frequency",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight.bold)),
+                                                                SizedBox(
+                                                                    height: 5),
+                                                                Text(
+                                                                    data.data()['wifiList'][wifiIndex]['Frequency'] !=
+                                                                            null
+                                                                        ? data.data()['wifiList'][wifiIndex]['Frequency'] +
+                                                                            ' MHZ'
+                                                                        : '-',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black87)),
+                                                              ],
+                                                            )
                                                         ],
-                                                      )
-                                                    ],
-                                                  )), Container(
-                                                  padding: EdgeInsets.only(
-                                                      top: 15,
-                                                      bottom: 18,
-                                                      left: 20,
-                                                      right: 20),
-                                                  child: Row(
-                                                    children: [
-                                                      /*Icon(
-                                                          CupertinoIcons
-                                                              .location_solid,
-                                                          size: 30,
-                                                          color: Colors.grey),
-                                                      SizedBox(width: 20),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                      )),
+                                                  Container(
+                                                      padding: EdgeInsets.only(
+                                                          top: 15,
+                                                          bottom: 18,
+                                                          left: 20,
+                                                          right: 20),
+                                                      child: Row(
                                                         children: [
-                                                          Text("Distance",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold)),
-                                                          SizedBox(height: 5),
-                                                          Text(
-                                                              calculateDistance(
-                                                                          int.parse(data.data()['wifiList'][wifiIndex]['level'])
-                                                                              .abs()
-                                                                              .toDouble(),
-                                                                          int.parse(data.data()['wifiList'][wifiIndex]['Frequency'])
-                                                                              .toDouble())
-                                                                      .toString()
-                                                                      .substring(
-                                                                          0,
-                                                                          4) +
-                                                                  " m",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black87))
+                                                          Icon(
+                                                              CupertinoIcons
+                                                                  .location_solid,
+                                                              size: 30,
+                                                              color:
+                                                                  Colors.grey),
+                                                          SizedBox(width: 20),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text("Distance",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                              SizedBox(
+                                                                  height: 5),
+                                                              Text(
+                                                                  calculateDistance(int.parse(data.data()['wifiList'][wifiIndex]['level']).abs().toDouble(), int.parse(data.data()['wifiList'][wifiIndex]['Frequency']).toDouble())
+                                                                          .toString()
+                                                                          .substring(
+                                                                              0,
+                                                                              4) +
+                                                                      " m",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black87))
+                                                            ],
+                                                          )
                                                         ],
-                                                      )*/
-                                                    ],
-                                                  )),]),
-                                                  
-                                            ],
+                                                      )),
+                                                      Container(
+                                                      padding: EdgeInsets.only(
+                                                          top: 15,
+                                                          bottom: 18,
+                                                          left: 20,
+                                                          right: 20),
+                                                      child: Row(
+                                                        children: [
+                                                          Icon(
+                                                              CupertinoIcons.time,
+                                                              size: 30,
+                                                              color:
+                                                                  Colors.grey),
+                                                          SizedBox(width: 20),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text("Updated at",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                              SizedBox(
+                                                                  height: 5),
+                                                              Text(
+                                                                  data.data()['updatedAt'].toDate().toString(),
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black87))
+                                                            ],
+                                                          )
+                                                        ],
+                                                      )),
+                                                ]),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        
-                                      ],
-                                    )),);
+                                        ],
+                                      )),
+                                    );
                                   }))
                           : Container(),
                     ),
