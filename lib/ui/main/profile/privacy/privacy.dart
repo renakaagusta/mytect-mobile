@@ -83,29 +83,6 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                         SizedBox(
                           height: 30,
                         ),
-                        GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 10.0),
-                              width: size.width - 70,
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(colors: [
-                                    AppColors.PrimaryColor,
-                                    AppColors.SecondaryColor
-                                  ]),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                              child: Text(
-                                'Baca',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 16.0),
-                              ),
-                            )),
-                        SizedBox(
-                          height: 30,
-                        ),
                       ],
                     ),
                   ),

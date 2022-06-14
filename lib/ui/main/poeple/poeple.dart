@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:mytect/constants/assets.dart';
 import 'package:mytect/constants/colors.dart';
 import 'package:mytect/ui/main/poeple/poeple_location.dart';
-import 'package:mytect/utils/timeago/timeago.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PeopleScreen extends StatefulWidget {
@@ -114,8 +113,10 @@ class _PeopleScreenState extends State<PeopleScreen>
                   List<dynamic> users = snapshot.data.docs;
 
                   return StreamBuilder<QuerySnapshot>(
-                      stream:
-                          firestore.collection('predictionResult').orderBy('created', descending: true).snapshots(),
+                      stream: firestore
+                          .collection('predictionResult')
+                          .orderBy('created', descending: true)
+                          .snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (!snapshot.hasData) {
@@ -129,19 +130,27 @@ class _PeopleScreenState extends State<PeopleScreen>
 
                         return snapshot.data.docs.isNotEmpty
                             ? Container(
-                              height: MediaQuery.of(context).size.height,
-                              width: MediaQuery.of(context).size.width,
-                              child: ListView.builder(
-                                  controller: scrollController,
-                                  itemCount: docs.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    dynamic foundUser;
-                                    
-                                    users.forEach((user){
-                                      if(user.id.toString() == docs[index].data()['user']) foundUser = user;
-                                    });
-                                    return GestureDetector(
-                                      onTap:()=>Navigator.of(context).pushNamed('/poeple/location', arguments: PeopleLocationArguments(foundUser, docs[index].data()),),
+                                height: MediaQuery.of(context).size.height,
+                                width: MediaQuery.of(context).size.width,
+                                child: ListView.builder(
+                                    controller: scrollController,
+                                    itemCount: docs.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      dynamic foundUser;
+
+                                      users.forEach((user) {
+                                        if (user.id.toString() ==
+                                            docs[index].data()['user'])
+                                          foundUser = user;
+                                      });
+                                      return GestureDetector(
+                                        onTap: () =>
+                                            Navigator.of(context).pushNamed(
+                                          '/poeple/location',
+                                          arguments: PeopleLocationArguments(
+                                              foundUser, docs[index].data()),
+                                        ),
                                         child: Container(
                                             decoration: BoxDecoration(
                                                 color: Colors.white,
@@ -156,7 +165,8 @@ class _PeopleScreenState extends State<PeopleScreen>
                                                 bottom: 15),
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Column(
                                                   crossAxisAlignment:
@@ -174,26 +184,28 @@ class _PeopleScreenState extends State<PeopleScreen>
                                                               .toString(),
                                                           style: TextStyle(
                                                               fontWeight:
-                                                                  FontWeight.bold,
+                                                                  FontWeight
+                                                                      .bold,
                                                               fontSize: 16)),
                                                     ),
                                                     SizedBox(height: 5),
-                                                    Text(foundUser['username'],),
+                                                    Text(
+                                                      foundUser['username'],
+                                                    ),
                                                     SizedBox(height: 5),
                                                     Text(
-                                                        TimeAgo.timeAgoSinceDate(
-                                                            docs[index]['created']
-                                                                .toDate()
-                                                                .toString()),
+                                                        docs[index]['created']
+                                                            .toDate()
+                                                            .toString(),
                                                         style: TextStyle(
                                                             color: Colors.grey))
                                                   ],
                                                 )
                                               ],
                                             )),
-                                       );
-                                  }),
-                            )
+                                      );
+                                    }),
+                              )
                             : Container(
                                 width: size.width - 40,
                                 child: Column(

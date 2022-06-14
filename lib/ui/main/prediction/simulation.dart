@@ -117,7 +117,8 @@ class _SimulationScreenState extends State<SimulationScreen>
                         SizedBox(
                           height: 10,
                         ),
-                        Text('Tekan tombol start untuk mulai melakukan simulasi',
+                        Text(
+                            'Tekan tombol start untuk mulai melakukan simulasi',
                             style: TextStyle(fontSize: 16)),
                         SizedBox(
                           height: 40,
@@ -431,11 +432,10 @@ class _SimulationScreenState extends State<SimulationScreen>
                                       });
 
                                       List<String> locationPredicted = [];
-                                      response.forEachIndexed(((index, element) {
-                                        locationPredicted.add(
-                                      ssidPlaceName[
-                                                          response[index]
-                                                              .toString()]);
+                                      response
+                                          .forEachIndexed(((index, element) {
+                                        locationPredicted.add(ssidPlaceName[
+                                            response[index].toString()]);
                                       }));
 
                                       await firestore
@@ -483,6 +483,9 @@ class _SimulationScreenState extends State<SimulationScreen>
                             child: ListView.builder(
                                 itemCount: response.length + 2,
                                 itemBuilder: (context, index) {
+                                  print("index..");
+                                  print(index);
+                                  print(index == 0);
                                   return index == 0
                                       ? Container(
                                           child: Column(
@@ -494,13 +497,72 @@ class _SimulationScreenState extends State<SimulationScreen>
                                                       fontSize: 20)),
                                               SizedBox(
                                                 height: 10,
-                                              )
+                                              ),
+                                              Text(response.toString()),
+                                              Text(
+                                                  //'Berdasarkan kuat sinyal terbesar dari cluster dengan ssid terdekat yaitu ssid ${ssidPlaceName.entries.whereIndexed((index, ssid) => ssid.value == response['place'][0]).first.key}',
+                                                  '',
+                                                  style:
+                                                      TextStyle(fontSize: 20)),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
                                             ],
                                           ),
                                           margin: EdgeInsets.only(bottom: 50),
                                         )
-                                      : index == response.length + 1
-                                          ? Container()
+                                      : index == 1
+                                          ? Column(children: [
+                                              Container(
+                                                child: Column(
+                                                  children: [
+                                                    Text('Hasil Klusterisasi',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 20)),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Text(
+                                                        'Berdasarkan kuat sinyal terbesar dari cluster dengan ssid terdekat yaitu ssid ${response[0]}',
+                                                        style: TextStyle(
+                                                            fontSize: 20)),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                  ],
+                                                ),
+                                                margin:
+                                                    EdgeInsets.only(bottom: 50),
+                                              ),
+                                              Container(
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 30),
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color:
+                                                              Colors.black26)),
+                                                  child: Column(
+                                                    children: [
+                                                      Image.asset(ssidAssetList[
+                                                          response[index - 1]
+                                                              .toString()]),
+                                                      SizedBox(height: 10),
+                                                      Text(
+                                                          ssidPlaceName[
+                                                              response[
+                                                                      index - 1]
+                                                                  .toString()],
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 20)),
+                                                      SizedBox(height: 10),
+                                                    ],
+                                                  ))
+                                            ])
                                           : Container(
                                               margin:
                                                   EdgeInsets.only(bottom: 30),
@@ -578,17 +640,23 @@ class _SimulationScreenState extends State<SimulationScreen>
                                                                   CrossAxisAlignment
                                                                       .start,
                                                               children: [
-                                                                SizedBox(width: MediaQuery.of(context).size.width - 80,child: 
-                                                                Text(
-                                                                    docs[index]
-                                                                            .data()[
-                                                                        'place'].toString(),
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        fontSize:
-                                                                            16)),),
+                                                                SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width -
+                                                                      80,
+                                                                  child: Text(
+                                                                      docs[index]
+                                                                          .data()[
+                                                                              'place']
+                                                                          .toString(),
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                              16)),
+                                                                ),
                                                                 SizedBox(
                                                                     height: 5),
                                                                 Text(

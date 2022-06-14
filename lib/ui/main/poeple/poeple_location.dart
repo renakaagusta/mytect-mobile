@@ -1,12 +1,9 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mytect/constants/assets.dart';
 import 'package:mytect/constants/ssid.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class PeopleLocationArguments {
   final dynamic user;
@@ -99,7 +96,13 @@ class _PeopleLocationScreenState extends State<PeopleLocationScreen>
                                             fontWeight: FontWeight.bold)),
                                     SizedBox(
                                       height: 20,
-                                    ),Text('Lokasi',
+                                    ),
+                                    Text('Lokasi',
+                                        style: TextStyle(fontSize: 20)),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text('Berdasarkan kuat sinyal terbesar dari cluster dengan ssid terdekat yaitu ssid ${ssidPlaceName.entries.whereIndexed((index, ssid) => ssid.value == predictionResult['place'][0]).first.key}',
                                         style: TextStyle(fontSize: 20)),
                                     SizedBox(
                                       height: 10,

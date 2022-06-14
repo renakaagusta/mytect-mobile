@@ -631,6 +631,51 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                       child: Row(
                                                         children: [
                                                           Icon(
+                                                              CupertinoIcons.add,
+                                                              size: 30,
+                                                              color:
+                                                                  Colors.grey),
+                                                          SizedBox(width: 20),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text("Capabilities",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                              SizedBox(
+                                                                  height: 5),
+                                                              Text(
+                                                                data.data()['wifiList'][wifiIndex]
+                                                                              [
+                                                                              'Capabilities'] !=
+                                                                          null
+                                                                      ? data.data()['wifiList'][wifiIndex]
+                                                                              [
+                                                                              'Capabilities'] +
+                                                                          ' MHZ'
+                                                                      : '-',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black87))
+                                                            ],
+                                                          )
+                                                        ],
+                                                      )),
+                                                  /*Container(
+                                                      padding: EdgeInsets.only(
+                                                          top: 15,
+                                                          bottom: 18,
+                                                          left: 20,
+                                                          right: 20),
+                                                      child: Row(
+                                                        children: [
+                                                          Icon(
                                                               CupertinoIcons
                                                                   .location_solid,
                                                               size: 30,
@@ -664,7 +709,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                             ],
                                                           )
                                                         ],
-                                                      )),
+                                                      )),*/
                                                       Container(
                                                       padding: EdgeInsets.only(
                                                           top: 15,
