@@ -172,7 +172,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     if (snapshot.data == null)
                                       return Container();
 
+                                    if (snapshot.data.docs.length == 0) {
+                                      return Center(
+                                          child: CircularProgressIndicator(
+                                        color: AppColors.PrimaryColor,
+                                      ));
+                                    }
+
                                     dynamic data = snapshot.data.docs[0];
+
+                                    if (snapshot.data.docs.isEmpty) {
+                                      return Center(
+                                          child: Text("Data not found"));
+                                    }
 
                                     return SingleChildScrollView(
                                       child: Container(
@@ -631,7 +643,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                       child: Row(
                                                         children: [
                                                           Icon(
-                                                              CupertinoIcons.add,
+                                                              CupertinoIcons
+                                                                  .add,
                                                               size: 30,
                                                               color:
                                                                   Colors.grey),
@@ -641,7 +654,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              Text("Capabilities",
+                                                              Text(
+                                                                  "Capabilities",
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .black,
@@ -651,7 +665,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                               SizedBox(
                                                                   height: 5),
                                                               Text(
-                                                                data.data()['wifiList'][wifiIndex]
+                                                                  data.data()['wifiList'][wifiIndex]
                                                                               [
                                                                               'Capabilities'] !=
                                                                           null
@@ -667,7 +681,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                           )
                                                         ],
                                                       )),
-                                                  /*Container(
+                                                  Container(
                                                       padding: EdgeInsets.only(
                                                           top: 15,
                                                           bottom: 18,
@@ -677,49 +691,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                         children: [
                                                           Icon(
                                                               CupertinoIcons
-                                                                  .location_solid,
-                                                              size: 30,
-                                                              color:
-                                                                  Colors.grey),
-                                                          SizedBox(width: 20),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text("Distance",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold)),
-                                                              SizedBox(
-                                                                  height: 5),
-                                                              Text(
-                                                                  calculateDistance(int.parse(data.data()['wifiList'][wifiIndex]['level']).abs().toDouble(), int.parse(data.data()['wifiList'][wifiIndex]['Frequency']).toDouble())
-                                                                          .toString()
-                                                                          .substring(
-                                                                              0,
-                                                                              4) +
-                                                                      " m",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black87))
-                                                            ],
-                                                          )
-                                                        ],
-                                                      )),*/
-                                                      Container(
-                                                      padding: EdgeInsets.only(
-                                                          top: 15,
-                                                          bottom: 18,
-                                                          left: 20,
-                                                          right: 20),
-                                                      child: Row(
-                                                        children: [
-                                                          Icon(
-                                                              CupertinoIcons.time,
+                                                                  .time,
                                                               size: 30,
                                                               color:
                                                                   Colors.grey),
@@ -739,7 +711,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                               SizedBox(
                                                                   height: 5),
                                                               Text(
-                                                                  data.data()['updatedAt'].toDate().toString(),
+                                                                  data
+                                                                      .data()[
+                                                                          'updatedAt']
+                                                                      .toDate()
+                                                                      .toString(),
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .black87))
@@ -747,6 +723,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                           )
                                                         ],
                                                       )),
+                                                  SizedBox(height: 20),
                                                 ]),
                                               ],
                                             ),

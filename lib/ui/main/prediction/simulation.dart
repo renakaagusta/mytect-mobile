@@ -483,27 +483,20 @@ class _SimulationScreenState extends State<SimulationScreen>
                             child: ListView.builder(
                                 itemCount: response.length + 2,
                                 itemBuilder: (context, index) {
-                                  print("index..");
-                                  print(index);
-                                  print(index == 0);
                                   return index == 0
                                       ? Container(
                                           child: Column(
                                             children: [
-                                              Text('Hasil Klusterisasi',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 20)),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Text(response.toString()),
-                                              Text(
-                                                  //'Berdasarkan kuat sinyal terbesar dari cluster dengan ssid terdekat yaitu ssid ${ssidPlaceName.entries.whereIndexed((index, ssid) => ssid.value == response['place'][0]).first.key}',
-                                                  '',
+                                              Text('Hasil Klusterisasi: ',
                                                   style:
-                                                      TextStyle(fontSize: 20)),
+                                                      TextStyle(fontSize: 20, color: Colors.white)),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                  'Berdasarkan kuat sinyal terbesar dari cluster dengan ssid terdekat yaitu ssid ${response[0]}',
+                                                  style:
+                                                      TextStyle(fontSize: 20, color: Colors.white)),
                                               SizedBox(
                                                 height: 10,
                                               ),
@@ -516,13 +509,11 @@ class _SimulationScreenState extends State<SimulationScreen>
                                               Container(
                                                 child: Column(
                                                   children: [
-                                                    Text('Hasil Klusterisasi',
+                                                    Text('Hasil Klusterisasi: ',
                                                         style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20)),
+                                                            fontSize: 20, fontWeight: FontWeight.bold)),
                                                     SizedBox(
-                                                      height: 10,
+                                                      height: 5,
                                                     ),
                                                     Text(
                                                         'Berdasarkan kuat sinyal terbesar dari cluster dengan ssid terdekat yaitu ssid ${response[0]}',
@@ -545,7 +536,7 @@ class _SimulationScreenState extends State<SimulationScreen>
                                                               Colors.black26)),
                                                   child: Column(
                                                     children: [
-                                                      Image.asset(ssidAssetList[
+                                                     Image.asset(ssidAssetList[
                                                           response[index - 1]
                                                               .toString()]),
                                                       SizedBox(height: 10),
@@ -563,7 +554,7 @@ class _SimulationScreenState extends State<SimulationScreen>
                                                     ],
                                                   ))
                                             ])
-                                          : Container(
+                                          : (response.length > index - 1) ? Container(
                                               margin:
                                                   EdgeInsets.only(bottom: 30),
                                               decoration: BoxDecoration(
@@ -585,7 +576,7 @@ class _SimulationScreenState extends State<SimulationScreen>
                                                           fontSize: 20)),
                                                   SizedBox(height: 10),
                                                 ],
-                                              ));
+                                              )):Container();
                                 }))
                         : Container(
                             width: MediaQuery.of(context).size.width,
@@ -606,6 +597,10 @@ class _SimulationScreenState extends State<SimulationScreen>
                                       }
 
                                       List<dynamic> docs = snapshot.data.docs;
+
+                                      if(docs.isEmpty) {
+                                        return Center(child:Text('Data not found'));
+                                      }
 
                                       return snapshot.data.docs.isNotEmpty
                                           ? ListView.builder(
@@ -673,12 +668,12 @@ class _SimulationScreenState extends State<SimulationScreen>
                                                           ],
                                                         )),
                                                     onTap: () {
-                                                      Navigator.of(context)
+                                                      /*Navigator.of(context)
                                                           .pushNamed('/data',
                                                               arguments: {
                                                             'dataId':
                                                                 docs[index].id,
-                                                          });
+                                                          });*/
                                                     });
                                               })
                                           : Container(

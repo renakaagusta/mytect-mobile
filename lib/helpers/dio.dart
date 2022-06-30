@@ -11,7 +11,7 @@ class AppDio {
       responseType: ResponseType.json,
       receiveDataWhenStatusError: false,
       connectTimeout: 30000,
-      receiveTimeout: 3000,
+      receiveTimeout: 30000,
     );
     dio = Dio(options);
     return dio;

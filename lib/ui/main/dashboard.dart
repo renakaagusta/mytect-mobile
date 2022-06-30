@@ -94,7 +94,7 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
 
-    Timer.periodic(Duration(seconds: 40), (timer) {
+    Timer.periodic(Duration(seconds: 35), (timer) {
       getData();
     });
   }

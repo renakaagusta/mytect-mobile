@@ -112,7 +112,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                                   .collection('dataByLocation')
                                                   .where('user',
                                                       isEqualTo: user['id'])
-                                                  .orderBy('created', descending: true)
+                                                  .orderBy('created',
+                                                      descending: true)
                                                   .snapshots(),
                                               builder: (BuildContext context,
                                                   AsyncSnapshot<QuerySnapshot>
@@ -128,6 +129,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
                                                 List<dynamic> docs =
                                                     snapshot.data.docs;
+
+                                                if (snapshot.data.docs.length ==
+                                                    0) {
+                                                  return Center(child: Text("Data not found"));
+                                                }
 
                                                 return snapshot
                                                         .data.docs.isNotEmpty
@@ -171,9 +177,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                                                           Text(
                                                                               docs[index].data()['place'],
                                                                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                                                                          if(docs[index].data()['floor']!=null)Text(
-                                                                              'Lantai ' + docs[index].data()['floor'],
-                                                                              style: TextStyle(fontSize: 14)),
+                                                                          if (docs[index].data()['floor'] !=
+                                                                              null)
+                                                                            Text('Lantai ' + docs[index].data()['floor'],
+                                                                                style: TextStyle(fontSize: 14)),
                                                                           SizedBox(
                                                                               height: 5),
                                                                           Text(

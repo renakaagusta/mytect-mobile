@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:mytect/constants/assets.dart';
 import 'package:mytect/constants/colors.dart';
 import 'package:mytect/ui/main/poeple/poeple_location.dart';
+import 'package:mytect/utils/timeago/timeago.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PeopleScreen extends StatefulWidget {
@@ -112,6 +113,13 @@ class _PeopleScreenState extends State<PeopleScreen>
 
                   List<dynamic> users = snapshot.data.docs;
 
+                  if (users.length == 0) {
+                    return Center(
+                        child: CircularProgressIndicator(
+                      color: AppColors.PrimaryColor,
+                    ));
+                  }
+
                   return StreamBuilder<QuerySnapshot>(
                       stream: firestore
                           .collection('predictionResult')
@@ -125,8 +133,21 @@ class _PeopleScreenState extends State<PeopleScreen>
                             color: AppColors.PrimaryColor,
                           ));
                         }
+                        if (snapshot.data.docs.length == 0) {
+                          return Center(
+                              child: CircularProgressIndicator(
+                            color: AppColors.PrimaryColor,
+                          ));
+                        }
 
                         List<dynamic> docs = snapshot.data.docs;
+
+                        if (docs.length == 0) {
+                          return Center(
+                              child: CircularProgressIndicator(
+                            color: AppColors.PrimaryColor,
+                          ));
+                        }
 
                         return snapshot.data.docs.isNotEmpty
                             ? Container(
@@ -194,9 +215,11 @@ class _PeopleScreenState extends State<PeopleScreen>
                                                     ),
                                                     SizedBox(height: 5),
                                                     Text(
-                                                        docs[index]['created']
-                                                            .toDate()
-                                                            .toString(),
+                                                        TimeAgo.timeAgoSinceDate(
+                                                            docs[index]
+                                                                    ['created']
+                                                                .toDate()
+                                                                .toString()),
                                                         style: TextStyle(
                                                             color: Colors.grey))
                                                   ],
