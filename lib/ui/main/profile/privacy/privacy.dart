@@ -1,19 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mytect/widgets/textfield_widget.dart';
-import 'package:sweetalert/sweetalert.dart';
-import 'dart:io';
-import 'package:dio/dio.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'package:path/path.dart' as path;
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:mytect/constants/assets.dart';
 import 'package:mytect/constants/colors.dart';
-import 'package:mytect/constants/strings.dart';
 
 class PrivacyScreen extends StatefulWidget {
   @override

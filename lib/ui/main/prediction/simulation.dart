@@ -422,7 +422,9 @@ class _SimulationScreenState extends State<SimulationScreen>
                                       result.entries
                                           .forEachIndexed((index, ssid) {
                                         if (ssid.value as int == 0) {
-                                          ssidPredicted.add(index);
+                                          if (ssidPredicted.length < 2) {
+                                            ssidPredicted.add(index);
+                                          }
                                         }
                                       });
 
@@ -434,8 +436,10 @@ class _SimulationScreenState extends State<SimulationScreen>
                                       List<String> locationPredicted = [];
                                       response
                                           .forEachIndexed(((index, element) {
-                                        locationPredicted.add(ssidPlaceName[
-                                            response[index].toString()]);
+                                        if (locationPredicted.length < 2) {
+                                          locationPredicted.add(ssidPlaceName[
+                                              response[index].toString()]);
+                                        }
                                       }));
 
                                       await firestore
@@ -488,15 +492,17 @@ class _SimulationScreenState extends State<SimulationScreen>
                                           child: Column(
                                             children: [
                                               Text('Hasil Klusterisasi: ',
-                                                  style:
-                                                      TextStyle(fontSize: 20, color: Colors.white)),
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.white)),
                                               SizedBox(
                                                 height: 5,
                                               ),
                                               Text(
                                                   'Berdasarkan kuat sinyal terbesar dari cluster dengan ssid terdekat yaitu ssid ${response[0]}',
-                                                  style:
-                                                      TextStyle(fontSize: 20, color: Colors.white)),
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.white)),
                                               SizedBox(
                                                 height: 10,
                                               ),
@@ -511,7 +517,10 @@ class _SimulationScreenState extends State<SimulationScreen>
                                                   children: [
                                                     Text('Hasil Klusterisasi: ',
                                                         style: TextStyle(
-                                                            fontSize: 20, fontWeight: FontWeight.bold)),
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
                                                     SizedBox(
                                                       height: 5,
                                                     ),
@@ -536,7 +545,7 @@ class _SimulationScreenState extends State<SimulationScreen>
                                                               Colors.black26)),
                                                   child: Column(
                                                     children: [
-                                                     Image.asset(ssidAssetList[
+                                                      Image.asset(ssidAssetList[
                                                           response[index - 1]
                                                               .toString()]),
                                                       SizedBox(height: 10),
@@ -554,29 +563,34 @@ class _SimulationScreenState extends State<SimulationScreen>
                                                     ],
                                                   ))
                                             ])
-                                          : (response.length > index - 1) ? Container(
-                                              margin:
-                                                  EdgeInsets.only(bottom: 30),
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.black26)),
-                                              child: Column(
-                                                children: [
-                                                  Image.asset(ssidAssetList[
-                                                      response[index - 1]
-                                                          .toString()]),
-                                                  SizedBox(height: 10),
-                                                  Text(
-                                                      ssidPlaceName[
+                                          : (response.length > index - 1)
+                                              ? Container(
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 30),
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color:
+                                                              Colors.black26)),
+                                                  child: Column(
+                                                    children: [
+                                                      Image.asset(ssidAssetList[
                                                           response[index - 1]
-                                                              .toString()],
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 20)),
-                                                  SizedBox(height: 10),
-                                                ],
-                                              )):Container();
+                                                              .toString()]),
+                                                      SizedBox(height: 10),
+                                                      Text(
+                                                          ssidPlaceName[
+                                                              response[
+                                                                      index - 1]
+                                                                  .toString()],
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 20)),
+                                                      SizedBox(height: 10),
+                                                    ],
+                                                  ))
+                                              : Container();
                                 }))
                         : Container(
                             width: MediaQuery.of(context).size.width,
@@ -598,14 +612,20 @@ class _SimulationScreenState extends State<SimulationScreen>
 
                                       List<dynamic> docs = snapshot.data.docs;
 
-                                      if(docs.isEmpty) {
-                                        return Center(child:Text('Data not found'));
+                                      if (docs.isEmpty) {
+                                        return Center(
+                                            child: Text('Data not found'));
                                       }
+
+                                      final resultList = docs
+                                          .where((doc) =>
+                                              doc.data()['place'].length > 0)
+                                          .toList();
 
                                       return snapshot.data.docs.isNotEmpty
                                           ? ListView.builder(
                                               controller: scrollController,
-                                              itemCount: docs.length,
+                                              itemCount: resultList.length,
                                               itemBuilder:
                                                   (BuildContext context,
                                                       int index) {
@@ -642,7 +662,8 @@ class _SimulationScreenState extends State<SimulationScreen>
                                                                           .width -
                                                                       80,
                                                                   child: Text(
-                                                                      docs[index]
+                                                                      resultList[
+                                                                              index]
                                                                           .data()[
                                                                               'place']
                                                                           .toString(),
@@ -655,7 +676,7 @@ class _SimulationScreenState extends State<SimulationScreen>
                                                                 SizedBox(
                                                                     height: 5),
                                                                 Text(
-                                                                    TimeAgo.timeAgoSinceDate(docs[index]
+                                                                    TimeAgo.timeAgoSinceDate(resultList[index]
                                                                             [
                                                                             'created']
                                                                         .toDate()

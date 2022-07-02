@@ -57,6 +57,8 @@ class _PeopleLocationScreenState extends State<PeopleLocationScreen>
     final arguments =
         ModalRoute.of(context)?.settings.arguments as PeopleLocationArguments;
     final predictionResult = arguments.predictionResult;
+    predictionResult['place'] = predictionResult['place'].length > 2 ? arguments.predictionResult['place'].sublist(2) : arguments.predictionResult['place'];
+
     final user = arguments.user;
     return Scaffold(
       body: Container(

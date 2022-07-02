@@ -201,8 +201,11 @@ class _PeopleScreenState extends State<PeopleScreen>
                                                               80,
                                                       child: Text(
                                                           docs[index]
-                                                              .data()['place']
-                                                              .toString(),
+                                                              .data()['place'].length > 2 ? 
+                                                          docs[index]
+                                                              .data()['place'].sublist(2).toString() : 
+                                                          docs[index]
+                                                              .data()['place'].toString(),
                                                           style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight
